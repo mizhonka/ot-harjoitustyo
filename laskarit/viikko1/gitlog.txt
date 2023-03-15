@@ -1,0 +1,85 @@
+commit cdc1e0ce6448e33dbd64b8de0498ae2a900078dd
+Author: Miranda Honkanen <miranda.honkanen@helsinki.fi>
+Date:   Wed Mar 15 16:32:19 2023 +0200
+
+    muutos
+
+ tiedostoja/file2             | 0
+ tiedostoja/{file1 => file22} | 0
+ 2 files changed, 0 insertions(+), 0 deletions(-)
+
+commit 76ecaefc8bf1105516d40f66a1597da6584aebb7
+Author: Miranda Honkanen <miranda.honkanen@helsinki.fi>
+Date:   Wed Mar 15 16:29:27 2023 +0200
+
+    tiedostoja luotu
+
+ tiedostoja/file1 | 0
+ tiedostoja/file2 | 0
+ tiedostoja/file3 | 0
+ 3 files changed, 0 insertions(+), 0 deletions(-)
+
+commit 2b858cf7c6bbeccca88f4f8e84841e1566a757ef
+Author: Miranda Honkanen <miranda.honkanen@helsinki.fi>
+Date:   Wed Mar 15 16:20:58 2023 +0200
+
+    uudelleennimeys
+
+ eka.txt | 1 +
+ 1 file changed, 1 insertion(+)
+
+commit fc1ffb5447f2c9905f8cff1e15d61de5fe01b20f
+Author: Miranda Honkanen <miranda.honkanen@helsinki.fi>
+Date:   Wed Mar 15 16:19:45 2023 +0200
+
+    poistettu toinen
+
+ toinen.txt | 1 -
+ 1 file changed, 1 deletion(-)
+
+commit 240d49cf7fb30a9187db8ba398d3ae17666d9c99
+Author: Miranda Honkanen <miranda.honkanen@helsinki.fi>
+Date:   Wed Mar 15 16:17:02 2023 +0200
+
+    stuff luotu
+
+ stuff/joku.txt | 0
+ 1 file changed, 0 insertions(+), 0 deletions(-)
+
+commit a87add71c69dc1db9a239db1ae5412181678aa29
+Author: Miranda Honkanen <miranda.honkanen@helsinki.fi>
+Date:   Wed Mar 15 16:16:01 2023 +0200
+
+    muutokset
+
+ kolmas.txt | 1 +
+ toinen.txt | 1 +
+ 2 files changed, 2 insertions(+)
+
+commit 33c5eff16f5ccec13feca86b4911c54f38b5b99a
+Author: Miranda Honkanen <miranda.honkanen@helsinki.fi>
+Date:   Wed Mar 15 16:15:09 2023 +0200
+
+    lisätty kolmas
+
+ kolmas.txt | 0
+ 1 file changed, 0 insertions(+), 0 deletions(-)
+
+commit 9ea92cd2b9b599bbdeb8a234250dc11e9ac3469a
+Author: Miranda Honkanen <miranda.honkanen@helsinki.fi>
+Date:   Wed Mar 15 16:13:33 2023 +0200
+
+    muutos ja lisäys
+
+ tiedosto.txt | 1 +
+ toinen.txt   | 0
+ 2 files changed, 1 insertion(+)
+
+commit fd7d1e512e7cd66f90c8457c80fcad0b6295480e
+Author: Miranda Honkanen <miranda.honkanen@helsinki.fi>
+Date:   Wed Mar 15 16:11:50 2023 +0200
+
+    tiedosto.txt luotu
+
+ tiedosto.txt | 0
+ 1 file changed, 0 insertions(+), 0 deletions(-)
