@@ -59,3 +59,9 @@ class TestKassapaate(unittest.TestCase):
         self.kassa.lataa_rahaa_kortille(kortti, 100)
         self.assertEqual(kortti.saldo, 100)
         self.assertEqual(self.kassa.kassassa_rahaa, 100100)
+    
+    def test_rahan_lataus_negatiivinen(self):
+        kortti=Maksukortti(0)
+        assert self.kassa.lataa_rahaa_kortille(kortti, -100)==None
+        self.assertEqual(kortti.saldo, 0)
+        self.assertEqual(self.kassa.kassassa_rahaa, 100000)
