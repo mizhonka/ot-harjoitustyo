@@ -6,3 +6,5 @@
 [komentorivi.txt](https://github.com/mizhonka/ot-harjoitustyo/blob/main/laskarit/viikko1/komentorivi.txt)
 ### Viikko 2
 [vaatimusmäärittely.md](https://github.com/mizhonka/ot-harjoitustyo/blob/main/dokumentaatio/vaatimusmaarittely.md)
+
+[tuntikirjanpito.md](https://github.com/mizhonka/ot-harjoitustyo/blob/main/dokumentaatio/tuntikirjanpito.md)
