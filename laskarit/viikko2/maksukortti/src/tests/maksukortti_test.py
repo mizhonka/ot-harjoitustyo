@@ -45,15 +45,15 @@ class TestMaksukortti(unittest.TestCase):
 
         self.assertEqual(str(self.kortti), "Kortilla on rahaa 10.00 euroa")
     
-    def syo_edullisesti_kun(self):
-        self.kortti.lataa_rahaa(250)
+    def test_syo_edullisesti_kun(self):
+        kortti=Maksukortti(250)
         kortti.syo_edullisesti()
 
-        self.assertEqual(str(self.kortti), "Kortilla on rahaa 0.00 euroa")
+        self.assertEqual(str(kortti), "Kortilla on rahaa 0.00 euroa")
     
-    def syo_maukkaasti_kun(self):
-        self.kortti.lataa_rahaa(400)
+    def test_syo_maukkaasti_kun(self):
+        kortti=Maksukortti(400)
         kortti.syo_maukkaasti()
 
-        self.assertEqual(str(self.kortti), "Kortilla on rahaa 0.00 euroa")
+        self.assertEqual(str(kortti), "Kortilla on rahaa 0.00 euroa")
 
