@@ -1,0 +1,15 @@
+[tool.poetry]
+name = "miinaharava"
+version = "0.1.0"
+description = ""
+authors = ["Miranda Honkanen <miranda.honkanen@helsinki.fi>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.8"
+cowsay = "^5.0"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
