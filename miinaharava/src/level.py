@@ -1,6 +1,15 @@
 import pygame
 import random
 from sprites.square import Square
+from sprites.number1 import Number_1
+from sprites.number2 import Number_2
+from sprites.number3 import Number_3
+from sprites.number4 import Number_4
+from sprites.number5 import Number_5
+from sprites.number6 import Number_6
+from sprites.number7 import Number_7
+from sprites.number8 import Number_8
+from sprites.hiddenMine import HiddenMine
 
 class Level:
     def __init__(self, sizeX, sizeY, mineX):
@@ -53,5 +62,8 @@ class Level:
                 sqr=self.grid[x][y]
                 normX=x*50
                 normY=y*50
-                self.squares.add(Square(normX, normY))
+                if self.grid[x][y]==1:
+                    self.squares.add(HiddenMine(normX, normY))
+                else:
+                    self.squares.add(Square(normX, normY))
         self.all_sprites.add(self.squares)
