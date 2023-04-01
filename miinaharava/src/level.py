@@ -10,6 +10,7 @@ from sprites.number6 import Number_6
 from sprites.number7 import Number_7
 from sprites.number8 import Number_8
 from sprites.hiddenMine import HiddenMine
+from sprites.flag import Flag
 
 class Level:
     def __init__(self, sizeX, sizeY, mineX):
@@ -59,11 +60,20 @@ class Level:
     def _init_sprites(self):
         for x in range(0, self.sizeX):
             for y in range(0, self.sizeY):
-                sqr=self.grid[x][y]
                 normX=x*50
                 normY=y*50
                 if self.grid[x][y]==1:
                     self.squares.add(HiddenMine(normX, normY))
+                elif self.grid[x][y]==2:
+                    self.squares.add(Flag(normX, normY))
                 else:
                     self.squares.add(Square(normX, normY))
         self.all_sprites.add(self.squares)
+    
+    def reveal(self, x, y):
+        if self.grid[x][y]==1:
+            return False
+        return True
+    
+    def draw_flag(self, x, y):
+        self.grid[x][y]=2

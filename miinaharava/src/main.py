@@ -20,9 +20,12 @@ def main():
                 running=False
             elif event.type==pygame.MOUSEBUTTONUP:
                 pos=pygame.mouse.get_pos()
-                y=int(math.modf(pos[0]/50)[1])
-                x=int(math.modf(pos[1]/50)[1])
-                
+                x=int(math.modf(pos[0]/50)[1])
+                y=int(math.modf(pos[1]/50)[1])
+                if event.button==1:
+                    running=level.reveal(x, y)
+                else:
+                    level.draw_flag(x, y)    
         pygame.display.update()
     pygame.quit()
 
