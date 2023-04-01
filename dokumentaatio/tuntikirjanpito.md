@@ -4,4 +4,4 @@
 |24.3 |<1      |Vaatimusmäärittely      |
 |31.3 |1       |Luokkien suunnittelua   |
 |1.4. |3       |Pelilaudan muodostaminen|
-|1.4. |1       |Ruutujen klikkaaminen   |
+|1.4. |2       |Ruutujen klikkaaminen   |
