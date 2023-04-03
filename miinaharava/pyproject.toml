@@ -9,6 +9,7 @@ readme = "README.md"
 python = "^3.8"
 cowsay = "^5.0"
 pygame = "^2.3.0"
+invoke = "^2.0.0"
 
 
 [tool.poetry.group.dev.dependencies]
