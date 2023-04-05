@@ -3,11 +3,11 @@ import pygame
 dirname = os.path.dirname(__file__)
 
 
-class Number5(pygame.sprite.Sprite):
+class HiddenMine(pygame.sprite.Sprite):
     def __init__(self, _x=0, _y=0):
         super().__init__()
         self.image = pygame.image.load(os.path.join(
-            dirname, "..", "assets", "number5.png"))
+            dirname, "..", "assets", "hiddenMine.png"))
         self.rect = self.image.get_rect()
-        self.rect._x = _x
-        self.rect._y = _y
+        self.rect.x = _x
+        self.rect.y = _y
