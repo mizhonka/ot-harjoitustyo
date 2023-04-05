@@ -6,3 +6,5 @@
 |1.4. |3       |Pelilaudan muodostaminen|
 |     |2       |Ruutujen klikkaaminen   |
 |3.4  |1       |Testaaminen ja invoke-käskyt|
+|5.4|1|pylint ja koodin parantelua|
+||1|Pelin laajentamista|
