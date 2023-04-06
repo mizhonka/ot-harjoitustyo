@@ -12,8 +12,8 @@ from sprites.number8 import Number8
 #from sprites.hidden_mine import HiddenMine
 from sprites.revealed_square import RevealedSquare
 from sprites.flag import Flag
-from sprites.voitto import Voitto
-from sprites.havio import Havio
+from sprites.win import Win
+from sprites.lose import Lose
 
 
 class Level:
@@ -79,9 +79,9 @@ class Level:
                 else:
                     self.all_sprites.add(Square(norm_x, norm_y))
         if self.win==-1:
-            self.all_sprites.add(Voitto((self.size_x*50)/2-125, (self.size_y*50)/2-75))
+            self.all_sprites.add(Win((self.size_x*50)/2-125, (self.size_y*50)/2-75))
         elif self.win==-2:
-            self.all_sprites.add(Havio((self.size_x*50)/2-125, (self.size_y*50)/2-75))
+            self.all_sprites.add(Lose((self.size_x*50)/2-125, (self.size_y*50)/2-75))
 
     def check_game_end(self):
         if not self.win==self.size_x*self.size_y:
