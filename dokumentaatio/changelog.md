@@ -17,4 +17,4 @@
 
 -Sovelluksen saa lopetettua painamalla esciä
 
--Koodia paranneltu pylint-ohjeiden mukaan (pygame no-type suodatettu pois koska en tiedä mitä tehdä asialle???)
+-Koodia paranneltu pylint-ohjeiden mukaan
