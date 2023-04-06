@@ -12,6 +12,8 @@ from sprites.number8 import Number8
 #from sprites.hidden_mine import HiddenMine
 from sprites.revealed_square import RevealedSquare
 from sprites.flag import Flag
+from sprites.voitto import Voitto
+from sprites.havio import Havio
 
 
 class Level:
@@ -20,9 +22,9 @@ class Level:
         self.size_y = size_y
         self.mine_x = mine_x
         self.mines = []
-        self.flags=[]
         self.revealed=[]
         self.adjacent = []
+        self.win=0
         self._place_mines()
         self.all_sprites = pygame.sprite.Group()
         self.init_sprites()
@@ -49,7 +51,6 @@ class Level:
         for _ in range(0, self.size_x):
             self.mines.append([0]*self.size_y)
             self.adjacent.append([0]*self.size_y)
-            self.flags.append([0]*self.size_y)
             self.revealed.append([0]*self.size_y)
         for _ in range(0, self.mine_x):
             while True:
@@ -66,27 +67,54 @@ class Level:
         return _s[_n](norm_x, norm_y)
 
     def init_sprites(self):
+        self.all_sprites.empty()
         for _x in range(0, self.size_x):
             for _y in range(0, self.size_y):
                 norm_x = _x*50
                 norm_y = _y*50
-                if self.flags[_x][_y] == 1:
+                if self.revealed[_x][_y] == 2:
                     self.all_sprites.add(Flag(norm_x, norm_y))
                 elif self.revealed[_x][_y]==1:
                     self.all_sprites.add(self._get_number(_x, _y, norm_x, norm_y))
                 else:
                     self.all_sprites.add(Square(norm_x, norm_y))
+        if self.win==-1:
+            self.all_sprites.add(Voitto((self.size_x*50)/2-125, (self.size_y*50)/2-75))
+        elif self.win==-2:
+            self.all_sprites.add(Havio((self.size_x*50)/2-125, (self.size_y*50)/2-75))
+    
+    def check_game_end(self):
+        if not self.win==self.size_x*self.size_y:
+            return
+        for _x in range(0, self.size_x):
+            for _y in range(0, self.size_y):
+                if self.revealed[_x][_y]==2 and (not self.mines[_x][_y]==1):
+                    return
+        self.win=-1
+        
 
     def reveal(self, _x, _y):
-        if self.flags[_x][_y]==1:
-            return True
+        if self.win<0:
+            return
+        if self.revealed[_x][_y]==(1 or 2):
+            return
         if self.mines[_x][_y] == 1:
-            return False
+            self.win=-2
+            return
         self.revealed[_x][_y]=1
-        return True
+        self.win+=1
+        self.check_game_end()
 
     def draw_flag(self, _x, _y):
-        if self.flags[_x][_y]==0:
-            self.flags[_x][_y] = 1
+        if self.win<0:
+            return
+        if self.revealed[_x][_y]==1:
+            return
+        if self.revealed[_x][_y]==0:
+            self.revealed[_x][_y] = 2
+            self.win+=1
         else:
-            self.flags[_x][_y] = 0
+            self.revealed[_x][_y] = 0
+            self.win-=1
+        self.check_game_end()
+
