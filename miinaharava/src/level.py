@@ -82,7 +82,7 @@ class Level:
             self.all_sprites.add(Voitto((self.size_x*50)/2-125, (self.size_y*50)/2-75))
         elif self.win==-2:
             self.all_sprites.add(Havio((self.size_x*50)/2-125, (self.size_y*50)/2-75))
-    
+
     def check_game_end(self):
         if not self.win==self.size_x*self.size_y:
             return
@@ -91,7 +91,7 @@ class Level:
                 if self.revealed[_x][_y]==2 and (not self.mines[_x][_y]==1):
                     return
         self.win=-1
-        
+
 
     def reveal(self, _x, _y):
         if self.win<0:
@@ -117,4 +117,3 @@ class Level:
             self.revealed[_x][_y] = 0
             self.win-=1
         self.check_game_end()
-

@@ -26,7 +26,7 @@ def main():
             elif event.type == pygame.MOUSEBUTTONUP and event.button==3: # pylint: disable=no-member
                 cords=mouse_pos()
                 level.draw_flag(cords[0], cords[1])
-            elif event.type==pygame.KEYDOWN and event.key==pygame.K_ESCAPE:
+            elif event.type==pygame.KEYDOWN and event.key==pygame.K_ESCAPE: # pylint: disable=no-member
                 running=False
         level.init_sprites()
         level.all_sprites.draw(display)

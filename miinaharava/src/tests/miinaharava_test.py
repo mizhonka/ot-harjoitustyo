@@ -9,6 +9,6 @@ class TestLevel(unittest.TestCase):
         y = 9
         m = 10
         level = Level(x, y, m)
-        self.assertEqual(x, level.sizeX)
-        self.assertEqual(y, level.sizeY)
-        self.assertEqual(m, level.mineX)
+        self.assertEqual(x, level.size_x)
+        self.assertEqual(y, level.size_y)
+        self.assertEqual(m, level.mine_x)
