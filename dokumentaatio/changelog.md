@@ -12,3 +12,9 @@
 -Oikea-klikkaus asettaa ruutuun lipun, mutta grafiikka ei näy vielä
 
 -Testattu, että Level-luokan parametrit määräytyvät oikein
+### Viikko 4
+-Peli toimii olennaisin osin (Ruutuja pystyy paljastamaan ja lippuja asettamaan, kaikkien ruutujen paljastaminen ja miinojen löytäminen johtaa voittoon, miinan klikkaaminen häviöön)
+
+-Sovelluksen saa lopetettua painamalla esciä
+
+-Koodia paranneltu pylint-ohjeiden mukaan (pygame no-type suodatettu pois koska en tiedä mitä tehdä asialle???)
