@@ -10,3 +10,4 @@
 ||1|Pelin laajentamista|
 |6.4.|1|pylint ja koodin parantelua|
 ||2|Pelin laajentamista|
+|yht|12|
