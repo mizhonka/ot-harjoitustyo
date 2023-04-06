@@ -9,5 +9,5 @@ class Number2(pygame.sprite.Sprite):
         self.image = pygame.image.load(os.path.join(
             dirname, "..", "assets", "number2.png"))
         self.rect = self.image.get_rect()
-        self.rect._x = _x
-        self.rect._y = _y
+        self.rect.x = _x
+        self.rect.y = _y
