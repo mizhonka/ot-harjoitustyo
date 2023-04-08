@@ -96,7 +96,7 @@ class Level:
     def reveal(self, _x, _y):
         if self.win<0:
             return
-        if self.revealed[_x][_y]==(1 or 2):
+        if self.revealed[_x][_y]==1 or self.revealed[_x][_y]==2:
             return
         if self.mines[_x][_y] == 1:
             self.win=-2
