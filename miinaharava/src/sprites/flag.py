@@ -2,6 +2,7 @@ import os
 import pygame
 dirname = os.path.dirname(__file__)
 
+#ffaafafa
 
 class Flag(pygame.sprite.Sprite):
     def __init__(self, _x=0, _y=0):
