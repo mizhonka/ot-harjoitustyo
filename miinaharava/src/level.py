@@ -15,9 +15,6 @@ from sprites.flag import Flag
 from sprites.win import Win
 from sprites.lose import Lose
 
-# jotain kommentt testtt
-
-
 
 class Level:
     def __init__(self, size_x, size_y, mine_x):
