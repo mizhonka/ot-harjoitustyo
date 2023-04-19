@@ -18,3 +18,8 @@
 -Sovelluksen saa lopetettua painamalla esciä
 
 -Koodia paranneltu pylint-ohjeiden mukaan
+
+### Viikko 5
+-Pelin perusominaisuudet valmiit (nyt isompi osa ruudukosta paljastuu, jos ruudun ympärillä ei ole miinoja)
+
+-Ulkonäköä paranneltu, paljastetut ruudut näkyvät selkeämmin ja kursorin alla oleva ruutu erottuu erivärisenä
