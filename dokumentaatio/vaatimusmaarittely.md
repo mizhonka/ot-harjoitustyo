@@ -8,7 +8,7 @@ Kyseessä on all-time classic miinaharava. Pelaajan tavoitteena on löytää pii
 
 - [X] Paljastettu ruutu näyttää miinojen määrät ympäröivissä ruuduissa
 
-- [ ] Jos ympäröivissä ruuduissa ei miinoja, isompi osa ruudukosta paljastuu
+- [X] Jos ympäröivissä ruuduissa ei miinoja, isompi osa ruudukosta paljastuu
 
 - [X] Jos paljastetussa ruudussa on miina, peli on hävitty
 
