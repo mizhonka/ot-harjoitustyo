@@ -9,7 +9,7 @@ from sprites.number5 import Number5
 from sprites.number6 import Number6
 from sprites.number7 import Number7
 from sprites.number8 import Number8
-#from sprites.hidden_mine import HiddenMine
+from sprites.hover_square import HoverSquare
 from sprites.revealed_square import RevealedSquare
 from sprites.flag import Flag
 from sprites.win import Win
@@ -24,6 +24,7 @@ class Level:
         self.mines = []
         self.revealed=[]
         self.adjacent = []
+        self.hovered=None
         self.win=0
         self._place_mines()
         self.all_sprites = pygame.sprite.Group()
@@ -72,7 +73,9 @@ class Level:
             for _y in range(0, self.size_y):
                 norm_x = _x*50
                 norm_y = _y*50
-                if self.revealed[_x][_y] == 2:
+                if (not self.hovered==None) and self.hovered[0]==_x and self.hovered[1]==_y:
+                    self.all_sprites.add(HoverSquare(norm_x, norm_y))
+                elif self.revealed[_x][_y] == 2:
                     self.all_sprites.add(Flag(norm_x, norm_y))
                 elif self.revealed[_x][_y]==1:
                     self.all_sprites.add(self._get_number(_x, _y, norm_x, norm_y))
@@ -82,6 +85,13 @@ class Level:
             self.all_sprites.add(Win((self.size_x*50)/2-125, (self.size_y*50)/2-75))
         elif self.win==-2:
             self.all_sprites.add(Lose((self.size_x*50)/2-125, (self.size_y*50)/2-75))
+    
+    def hover(self, _x, _y):
+        if self.revealed[_x][_y]==1 or self.revealed[_x][_y]==2:
+            self.hovered=None
+            return
+        self.hovered=(_x, _y)
+
 
     def check_game_end(self):
         if not self.win==self.size_x*self.size_y:
@@ -103,6 +113,7 @@ class Level:
             self.win=-2
             return
         self.revealed[_x][_y]=1
+        self.hovered=None
         if self.adjacent[_x][_y]==0:
             self.reveal(_x-1, _y+1)
             self.reveal(_x, _y+1)
@@ -121,6 +132,7 @@ class Level:
         if self.revealed[_x][_y]==1:
             return
         if self.revealed[_x][_y]==0:
+            self.hovered=None
             self.revealed[_x][_y] = 2
             self.win+=1
         else:

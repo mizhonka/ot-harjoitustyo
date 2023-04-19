@@ -18,13 +18,13 @@ def main():
     running = True
     while running:
         for event in pygame.event.get():
+            cords=mouse_pos()
+            level.hover(cords[0], cords[1])
             if event.type == pygame.QUIT:
                 running=False
             elif event.type == pygame.MOUSEBUTTONUP and event.button==1:
-                cords=mouse_pos()
                 level.reveal(cords[0], cords[1])
             elif event.type == pygame.MOUSEBUTTONUP and event.button==3:
-                cords=mouse_pos()
                 level.draw_flag(cords[0], cords[1])
             elif event.type==pygame.KEYDOWN and event.key==pygame.K_ESCAPE:
                 running=False
