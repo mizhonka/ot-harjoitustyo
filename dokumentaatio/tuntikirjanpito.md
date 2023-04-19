@@ -10,4 +10,5 @@
 ||1|Pelin laajentamista|
 |6.4.|1|pylint ja koodin parantelua|
 ||2|Pelin laajentamista|
-|yht|12|
+|19.4.|2|Perusversio valmiiksi, (pelin) ulkonäon hiomista|
+|yht|14|
