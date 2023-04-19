@@ -92,8 +92,9 @@ class Level:
                     return
         self.win=-1
 
-
     def reveal(self, _x, _y):
+        if (_x<0 or _x>self.size_x-1) or (_y<0 or _y>self.size_y-1):
+            return
         if self.win<0:
             return
         if self.revealed[_x][_y]==1 or self.revealed[_x][_y]==2:
@@ -102,6 +103,15 @@ class Level:
             self.win=-2
             return
         self.revealed[_x][_y]=1
+        if self.adjacent[_x][_y]==0:
+            self.reveal(_x-1, _y+1)
+            self.reveal(_x, _y+1)
+            self.reveal(_x+1, _y+1)
+            self.reveal(_x-1, _y)
+            self.reveal(_x+1, _y)
+            self.reveal(_x-1, _y-1)
+            self.reveal(_x, _y-1)
+            self.reveal(_x+1, _y-1)
         self.win+=1
         self.check_game_end()
 
