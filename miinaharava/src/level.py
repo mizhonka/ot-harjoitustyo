@@ -87,6 +87,9 @@ class Level:
             self.all_sprites.add(Lose((self.size_x*50)/2-125, (self.size_y*50)/2-75))
     
     def hover(self, _x, _y):
+        if self.win<0:
+            self.hovered=None
+            return
         if self.revealed[_x][_y]==1 or self.revealed[_x][_y]==2:
             self.hovered=None
             return
