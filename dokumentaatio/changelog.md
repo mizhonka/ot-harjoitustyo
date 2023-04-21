@@ -22,4 +22,6 @@
 ### Viikko 5
 -Pelin perusominaisuudet valmiit (nyt isompi osa ruudukosta paljastuu, jos ruudun ympärillä ei ole miinoja)
 
+-Ensimmäisestä klikatusta ruudusta ei löydy miinaa
+
 -Ulkonäköä paranneltu, paljastetut ruudut näkyvät selkeämmin ja kursorin alla oleva ruutu erottuu erivärisenä
