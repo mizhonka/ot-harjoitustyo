@@ -18,14 +18,16 @@ from sprites.lose import Lose
 
 
 class TestLevel(unittest.TestCase):
-    def test_grid_parameters(self):
-        x = 9
-        y = 9
-        m = 10
-        level = Level(x, y, m)
-        self.assertEqual(x, level.size[0])
-        self.assertEqual(y, level.size[1])
-        self.assertEqual(m, level.mine_x)
+    def setUp(self):
+        self.x = 9
+        self.y = 9
+        self.m = 10
+        self.level = Level(self.x, self.y, self.m)
+
+    def test_grid_parameters(self):     
+        self.assertEqual(self.x, self.level.size[0])
+        self.assertEqual(self.y, self.level.size[1])
+        self.assertEqual(self.m, self.level.mine_x)
     
     def test_sprite_rect(self):
         ss = [Square, HoverSquare, Flag, Win, Lose, RevealedSquare, Number1, Number2, Number3,
@@ -35,3 +37,7 @@ class TestLevel(unittest.TestCase):
             assert s.rect is not None
             self.assertEqual(0, s.rect.x)
             self.assertEqual(0, s.rect.y)
+    
+    def test_no_hover_when_end(self):
+        if self.level.win<0:
+            assert self.level.hovered is None
