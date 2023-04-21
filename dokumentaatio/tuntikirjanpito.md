@@ -13,4 +13,5 @@
 |19.4.|2|Perusversio valmiiksi, (pelin) ulkonäon hiomista|
 |20.4.|1|Lisää ulkonäön hiomista|
 |21.4.|<1|Funktio miinan siirtämiseen tarvittaessa|
+||<1|pylint ja koodin parantelua|
 |yht|15|
