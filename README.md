@@ -1,4 +1,4 @@
-# Miinaharava
+# Miinaharava (Ot-harjoitustyö)
 
 Pelissä on tarkoitus löytää piilotetut miinat ruudukosta. Vasen-klikkaamalla ruutua saat sen avattua ja ruudussa näkyvä numero näyttää, montako miinaa ympäröivissä ruuduissa on. Oikea-klikkaamalla saat merkittyä ruudun lipulla. Voitat, kun kaikki miinat on merkitty ja tyhjät ruudut avattu!
 
@@ -12,6 +12,7 @@ Pelissä on tarkoitus löytää piilotetut miinat ruudukosta. Vasen-klikkaamalla
 [Arkkitehtuurikuvaus](https://github.com/mizhonka/ot-harjoitustyo/blob/main/dokumentaatio/arkkitehtuuri.md)
 
 ## Asennus
+[Uusin release](https://github.com/mizhonka/ot-harjoitustyo/releases/tag/viikko5)
 
 1. Pura zip-tiedosto ja navigoi komentorivillä puretun hakemisto sisällä "miinaharava"-hakemistoon.
 
