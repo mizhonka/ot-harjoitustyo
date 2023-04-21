@@ -14,4 +14,5 @@
 |20.4.|1|Lisää ulkonäön hiomista|
 |21.4.|<1|Funktio miinan siirtämiseen tarvittaessa|
 ||<1|pylint ja koodin parantelua|
-|yht|15|
+||<1|Lisää testejä|
+|yht|16|
