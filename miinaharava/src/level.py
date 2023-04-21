@@ -104,8 +104,16 @@ class Level:
                 if self.revealed[_x][_y]==2 and (not self.mines[_x][_y]==1):
                     return
         self.win=-1
+    
+    def move_mine(self, _x, _y):
+        self.mines[_x][_y]=0
+        for _i in range(0, self.size_x):
+            for _j in range(0, self.size_y):
+                if self.mines[_i][_j]==0:
+                    self.mines[_i][_j]==1
+                    return
 
-    def reveal(self, _x, _y):
+    def reveal(self, _x, _y, firstClick):
         if (_x<0 or _x>self.size_x-1) or (_y<0 or _y>self.size_y-1):
             return
         if self.win<0:
@@ -113,19 +121,22 @@ class Level:
         if self.revealed[_x][_y]==1 or self.revealed[_x][_y]==2:
             return
         if self.mines[_x][_y] == 1:
-            self.win=-2
-            return
+            if firstClick:
+                self.move_mine(_x, _y)
+            else:
+                self.win=-2
+                return
         self.revealed[_x][_y]=1
         self.hovered=None
         if self.adjacent[_x][_y]==0:
-            self.reveal(_x-1, _y+1)
-            self.reveal(_x, _y+1)
-            self.reveal(_x+1, _y+1)
-            self.reveal(_x-1, _y)
-            self.reveal(_x+1, _y)
-            self.reveal(_x-1, _y-1)
-            self.reveal(_x, _y-1)
-            self.reveal(_x+1, _y-1)
+            self.reveal(_x-1, _y+1, False)
+            self.reveal(_x, _y+1, False)
+            self.reveal(_x+1, _y+1, False)
+            self.reveal(_x-1, _y, False)
+            self.reveal(_x+1, _y, False)
+            self.reveal(_x-1, _y-1, False)
+            self.reveal(_x, _y-1, False)
+            self.reveal(_x+1, _y-1, False)
         self.win+=1
         self.check_game_end()
 

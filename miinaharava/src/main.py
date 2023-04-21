@@ -16,6 +16,7 @@ def main():
     level = Level(LEVEL_X, LEVEL_Y, MINE_X)
     pygame.init()
     running = True
+    firstClick=True
     while running:
         for event in pygame.event.get():
             cords=mouse_pos()
@@ -23,7 +24,9 @@ def main():
             if event.type == pygame.QUIT:
                 running=False
             elif event.type == pygame.MOUSEBUTTONUP and event.button==1:
-                level.reveal(cords[0], cords[1])
+                level.reveal(cords[0], cords[1], firstClick)
+                if firstClick:
+                    firstClick=False
             elif event.type == pygame.MOUSEBUTTONUP and event.button==3:
                 level.draw_flag(cords[0], cords[1])
             elif event.type==pygame.KEYDOWN and event.key==pygame.K_ESCAPE:
