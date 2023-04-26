@@ -11,7 +11,6 @@ def mouse_pos():
     pos = pygame.mouse.get_pos()
     return (int(math.modf(pos[0]/50)[1]), int(math.modf(pos[1]/50)[1]))
 
-
 def main():
     display = pygame.display.set_mode((LEVEL_X*50, LEVEL_Y*50))
     pygame.display.set_caption("Miinaharava")
@@ -33,6 +32,8 @@ def main():
                 level.draw_flag(cords[0], cords[1])
             elif event.type == pygame.KEYDOWN and event.key == pygame.K_ESCAPE:
                 running = False
+            elif event.type == pygame.KEYDOWN and event.key == pygame.K_r:
+                level = Level(LEVEL_X, LEVEL_Y, MINE_X)
         level.init_sprites()
         level.all_sprites.draw(display)
         pygame.display.update()

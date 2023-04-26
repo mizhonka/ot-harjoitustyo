@@ -25,3 +25,6 @@
 -Ensimmäisestä klikatusta ruudusta ei löydy miinaa
 
 -Ulkonäköä paranneltu, paljastetut ruudut näkyvät selkeämmin ja kursorin alla oleva ruutu erottuu erivärisenä
+
+### Viikko 6
+-Pelin voi aloittaa alusta "r"-napilla (senhetkinen vaikeusaste)
