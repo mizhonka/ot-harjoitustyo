@@ -15,4 +15,5 @@
 |21.4.|<1|Funktio miinan siirtämiseen tarvittaessa|
 ||<1|pylint ja koodin parantelua|
 ||<1|Lisää testejä|
-|yht|16|
+|26.4.|1|Jatkokehitystä|
+|yht|17|
