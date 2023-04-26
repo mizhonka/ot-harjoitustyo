@@ -6,6 +6,13 @@ LEVEL_X = 9
 LEVEL_Y = 9
 MINE_X = 10
 
+def set_level(x, y, m):
+    global LEVEL_X
+    global LEVEL_Y
+    global MINE_X
+    LEVEL_X=x
+    LEVEL_Y=y
+    MINE_X=m
 
 def mouse_pos():
     pos = pygame.mouse.get_pos()
@@ -38,3 +45,16 @@ def main():
         level.all_sprites.draw(display)
         pygame.display.update()
     pygame.quit()
+
+def difficulty():
+    display = pygame.display.set_mode((250, 3*75))
+    pygame.display.set_caption("Miinaharava")
+    pygame.init()
+    v=int(input("Vaikeus:"))
+    if v==1:
+        set_level(9, 9, 10)
+    elif v==2:
+        set_level(16,16,40)
+    elif v==3:
+        set_level(30, 16, 99)
+    main()
