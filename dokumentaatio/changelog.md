@@ -27,4 +27,6 @@
 -Ulkonäköä paranneltu, paljastetut ruudut näkyvät selkeämmin ja kursorin alla oleva ruutu erottuu erivärisenä
 
 ### Viikko 6
+-Pelin vaikeusasteen pystyy valitsemaan (helppo, keskivaikea, vaikea)
+
 -Pelin voi aloittaa alusta "r"-napilla (senhetkinen vaikeusaste)
