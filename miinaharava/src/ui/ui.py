@@ -33,9 +33,9 @@ class Game:
         running = True
         first_click = True
         while running:
+            cords = self.mouse_pos()
+            level.hover(cords[0], cords[1])
             for event in pygame.event.get():
-                cords = self.mouse_pos()
-                level.hover(cords[0], cords[1])
                 if event.type == pygame.QUIT:
                     running = False
                 elif event.type == pygame.MOUSEBUTTONUP and event.button == 1:

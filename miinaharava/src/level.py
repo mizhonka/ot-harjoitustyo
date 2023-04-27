@@ -14,6 +14,7 @@ from sprites.revealed_square import RevealedSquare
 from sprites.flag import Flag
 from sprites.win import Win
 from sprites.lose import Lose
+from sprites.found_mine import FoundMine
 
 
 class Level:
@@ -73,7 +74,9 @@ class Level:
             for _y in range(0, self.size[1]):
                 norm_x = _x*50
                 norm_y = _y*50
-                if (not self.hovered is None) and self.hovered[0] == _x and self.hovered[1] == _y:
+                if self.revealed[_x][_y]==3:
+                    self.all_sprites.add(FoundMine(norm_x, norm_y))
+                elif (not self.hovered is None) and self.hovered[0] == _x and self.hovered[1] == _y:
                     self.all_sprites.add(HoverSquare(norm_x, norm_y))
                 elif self.revealed[_x][_y] == 2:
                     self.all_sprites.add(Flag(norm_x, norm_y))
@@ -136,6 +139,7 @@ class Level:
             if first_click:
                 self.move_mine(_x, _y)
             else:
+                self.revealed[_x][_y]=3
                 self.win = -2
                 return
         self.revealed[_x][_y] = 1
