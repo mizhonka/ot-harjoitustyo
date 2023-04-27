@@ -1,4 +1,5 @@
 from ui import ui
 
 if __name__ == "__main__":
-    ui.difficulty()
+    game=ui.Game()
+    game.difficulty()
