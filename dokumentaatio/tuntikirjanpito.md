@@ -16,4 +16,5 @@
 ||<1|pylint ja koodin parantelua|
 ||<1|Lisää testejä|
 |26.4.|1|Jatkokehitystä|
-|yht|17|
+|27.4.|1|Jatkokehitystä - Vaikeusasteet|
+|yht|18|
