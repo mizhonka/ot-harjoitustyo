@@ -58,11 +58,11 @@ class Game:
             self.buttons.add(EasyLight(0,0))
         else:
             self.buttons.add(Easy(0,0))
-        if v==(1 or 2):
+        if v==1 or v==2:
             self.buttons.add(MediumLight(0,75))
         else:
             self.buttons.add(Medium(0,75))
-        if v==(3 or 4):
+        if v==3 or v==4:
             self.buttons.add(HardLight(0,150))
         else:
             self.buttons.add(Hard(0,150))
@@ -87,8 +87,8 @@ class Game:
                     running=False
         if v==0:
             self.set_level(9, 9, 10)
-        elif v==(1 or 2):
+        elif v==1 or v==2:
             self.set_level(16,16,40)
-        elif v==(3 or 4):
+        elif v==3 or v==4:
             self.set_level(30, 16, 99)
         self.main()
