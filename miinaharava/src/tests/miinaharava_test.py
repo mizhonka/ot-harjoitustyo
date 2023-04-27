@@ -1,6 +1,7 @@
 import unittest
 import pygame
 from level import Level
+from ui.ui import Game
 from sprites.square import Square
 from sprites.number1 import Number1
 from sprites.number2 import Number2
@@ -15,6 +16,12 @@ from sprites.revealed_square import RevealedSquare
 from sprites.flag import Flag
 from sprites.win import Win
 from sprites.lose import Lose
+from sprites.easy import Easy
+from sprites.easy_light import EasyLight
+from sprites.medium import Medium
+from sprites.medium_light import MediumLight
+from sprites.hard import Hard
+from sprites.hard_light import HardLight
 
 
 class TestLevel(unittest.TestCase):
@@ -23,6 +30,7 @@ class TestLevel(unittest.TestCase):
         self.y = 9
         self.m = 10
         self.level = Level(self.x, self.y, self.m)
+        self.game=Game()
 
     def test_grid_parameters(self):
         self.assertEqual(self.x, self.level.size[0])
@@ -31,7 +39,7 @@ class TestLevel(unittest.TestCase):
 
     def test_sprite_rect(self):
         ss = [Square, HoverSquare, Flag, Win, Lose, RevealedSquare, Number1, Number2, Number3,
-              Number4, Number5, Number6, Number7, Number8]
+              Number4, Number5, Number6, Number7, Number8, Easy, EasyLight, Medium, MediumLight, Hard, HardLight]
         for s in ss:
             s = s()
             assert s.rect is not None
@@ -41,3 +49,9 @@ class TestLevel(unittest.TestCase):
     def test_no_hover_when_end(self):
         if self.level.win < 0:
             assert self.level.hovered is None
+    
+    def test_level_parameters(self):
+        self.game.set_level(self.x, self.y, self.m)
+        self.assertEqual(self.x, self.game.level_x)
+        self.assertEqual(self.y, self.game.level_y)
+        self.assertEqual(self.m, self.game.mine_x)

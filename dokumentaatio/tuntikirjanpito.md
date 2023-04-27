@@ -17,4 +17,5 @@
 ||<1|Lisää testejä|
 |26.4.|1|Jatkokehitystä|
 |27.4.|2|Jatkokehitystä - Vaikeusasteet|
-|yht|19|
+||1|testejä ja koodin parantelua|
+|yht|20|
