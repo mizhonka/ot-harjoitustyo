@@ -10,22 +10,45 @@ from sprites.hard_light import HardLight
 
 
 class Game:
+    """Luokka, joka luo uuden pelin ja käsittelee pelaajan syötteen
+
+    Attributes:
+        level_x: ruudukon leveys
+        level_y: ruudukon korkeus
+        mine_x: miinojen määrä
+    """
 
     def __init__(self):
+        """Luokan konstruktori
+        """
         self.level_x = 0
         self.level_y = 0
         self.mine_x = 0
 
     def set_level(self, x, y, m):
+        """Asettaa ruudukon tiedot
+
+        Args:
+            x: ruudukon leveys
+            y: ruudukon korkeus
+            x: miinojen määrä
+        """
         self.level_x = x
         self.level_y = y
         self.mine_x = m
 
     def mouse_pos(self):
+        """Hakee kursorin sijainnin
+
+        Returns:
+            Kursorin sijainnin koordinaatit tuplena ruutuihin suhteutettuna
+        """
         pos = pygame.mouse.get_pos()
         return (int(math.modf(pos[0]/50)[1]), int(math.modf(pos[1]/50)[1]))
 
     def main(self):
+        """Luo Level-olion ja käsittelee pelaajan syötteen
+        """
         display = pygame.display.set_mode((self.level_x*50, self.level_y*50))
         pygame.display.set_caption("Miinaharava")
         level = Level(self.level_x, self.level_y, self.mine_x)
@@ -54,6 +77,11 @@ class Game:
         pygame.quit()
 
     def add_buttons(self, v):
+        """Lisää oikeat valikkonapit ryhmään
+
+        Args:
+            v: vaikeusaste
+        """
         self.buttons.empty()
         if v == 0:
             self.buttons.add(EasyLight(0, 0))
@@ -69,6 +97,8 @@ class Game:
             self.buttons.add(Hard(0, 150))
 
     def difficulty(self):
+        """Luo vaikeusaste-valikon ja käsittelee pelaajan syötteen
+        """
         display = pygame.display.set_mode((250, 3*75))
         pygame.display.set_caption("Miinaharava")
         pygame.init()

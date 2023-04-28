@@ -18,7 +18,25 @@ from sprites.found_mine import FoundMine
 
 
 class Level:
+    """Luokka, joka sisältää tiedot pelattavasta ruudukosta ja klikatuista ruuduista
+
+    Attributes:
+        mine_x: miinojen määrä
+        size: ruudukon leveys ja korkeus
+        mines: miinojen sijainnit
+        revealed: ruutujen tilanne
+        adjacent: ruutuja ympäröivien miinojen määrä
+        hovered: koordinaatit ruudulle, jonka päällä kursori on
+        win: voiton/häviön tilanne
+    """
     def __init__(self, size_x, size_y, mine_x):
+        """Luokan konstruktori, joka luo uuden ruudukon
+
+        Args:
+            size_x: ruudukon leveys
+            size_y: ruudukon korkeus
+            mine_x: miinojen määrä
+        """
         self.mine_x = mine_x
         self.size = (size_x, size_y)
         self.mines = []
@@ -31,6 +49,12 @@ class Level:
         self.init_sprites()
 
     def _set_adjacents(self, _x, _y):
+        """Määrittää ruudulle, kuinka monta miinaa viereisissä ruuduissa on
+
+        Args:
+            _x: ruudun x-koordinaatti
+            _y: ruudun y-koordinaatti
+        """
         if _x > 0:
             if _y < self.size[1]-1:
                 self.adjacent[_x-1][_y+1] += 1
@@ -49,6 +73,8 @@ class Level:
             self.adjacent[_x+1][_y] += 1
 
     def _place_mines(self):
+        """Määrittää miinojen paikat ja muodostaa matriisit
+        """
         for _ in range(0, self.size[0]):
             self.mines.append([0]*self.size[1])
             self.adjacent.append([0]*self.size[1])
@@ -63,12 +89,25 @@ class Level:
                     break
 
     def _get_number(self, _x, _y, norm_x, norm_y):
+        """Hakee sopivan spriten paljastetulle ruudulle
+
+        Args:
+            _x: ruudun x-koordinaatti
+            _y: ruudun y-koordinaatti
+            norm_x: näytön x-koordinaatti
+            norm_y: näytön y-koordinaatti
+        
+        Returns:
+            Piirrettävä sprite
+        """
         _n = self.adjacent[_x][_y]
         _s = [RevealedSquare, Number1, Number2, Number3,
               Number4, Number5, Number6, Number7, Number8]
         return _s[_n](norm_x, norm_y)
 
     def init_sprites(self):
+        """Lisää näytölle piirrettävät spritet ryhmään
+        """
         self.all_sprites.empty()
         for _x in range(0, self.size[0]):
             for _y in range(0, self.size[1]):
@@ -93,6 +132,12 @@ class Level:
                 Lose((self.size[0]*50)/2-125, (self.size[1]*50)/2-75))
 
     def hover(self, _x, _y):
+        """Määrittää korostetun ruudun koordinaatit
+
+        Args:
+            _x: ruudun x-koordinaatti
+            _y: ruudun y-koordinaatti
+        """
         if self.win < 0:
             self.hovered = None
             return
@@ -102,6 +147,8 @@ class Level:
         self.hovered = (_x, _y)
 
     def check_game_end(self):
+        """Tarkistaa, onko peli voitettu
+        """
         if not self.win == self.size[0]*self.size[1]:
             return
         for _x in range(0, self.size[0]):
@@ -111,6 +158,12 @@ class Level:
         self.win = -1
 
     def move_mine(self, _x, _y):
+        """Siirtää miinan toiseen ruutuun
+
+        Args:
+            _x: ruudun x-koordinaatti
+            _y: ruudun y-koordinaatti
+        """
         self.mines[_x][_y] = 0
         for _i in range(0, self.size[0]):
             for _j in range(0, self.size[1]):
@@ -119,6 +172,12 @@ class Level:
                     return
 
     def recur_reveal(self, _x, _y):
+        """Paljastaa jokaisen vierekkäisen ruudun
+
+        Args:
+            _x: ruudun x-koordinaatti
+            _y: ruudun y-koordinaatti
+        """
         self.reveal(_x-1, _y+1, False)
         self.reveal(_x, _y+1, False)
         self.reveal(_x+1, _y+1, False)
@@ -129,6 +188,13 @@ class Level:
         self.reveal(_x+1, _y-1, False)
 
     def reveal(self, _x, _y, first_click):
+        """Paljastaa valitun ruudun
+
+        Args:
+            _x: ruudun x-koordinaatti
+            _y: ruudun y-koordinaatti
+            first_click: onko tämä ensimmäinen klikattu ruutu (True/False)
+        """
         if (_x < 0 or _x > self.size[0]-1) or (_y < 0 or _y > self.size[1]-1):
             return
         if self.win < 0:
@@ -150,6 +216,12 @@ class Level:
         self.check_game_end()
 
     def draw_flag(self, _x, _y):
+        """Sijoittaa lipun ruutuun
+
+        Args:
+            _x: ruudun x-koordinaatti
+            _y: ruudun y-koordinaatti
+        """
         if self.win < 0:
             return
         if self.revealed[_x][_y] == 1:
