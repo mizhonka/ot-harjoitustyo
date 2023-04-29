@@ -1,4 +1,4 @@
-### Arkkitehtuurikuvaus
+# Arkkitehtuurikuvaus
 
 ## Rakenne
 Koodi on pakattu seuraavasti:
