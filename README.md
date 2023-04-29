@@ -14,7 +14,7 @@ Pelissä on tarkoitus löytää piilotetut miinat ruudukosta numerovihjeiden per
 [Arkkitehtuurikuvaus](https://github.com/mizhonka/ot-harjoitustyo/blob/main/dokumentaatio/arkkitehtuuri.md)
 
 ## Asennus
-[Uusin release](https://github.com/mizhonka/ot-harjoitustyo/releases/tag/viikko5)
+[Releaset](https://github.com/mizhonka/ot-harjoitustyo/releases)
 
 1. Pura zip-tiedosto ja navigoi komentorivillä puretun hakemisto sisällä "miinaharava"-hakemistoon.
 
