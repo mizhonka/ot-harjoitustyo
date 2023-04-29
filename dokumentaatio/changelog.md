@@ -30,3 +30,5 @@
 -Pelin vaikeusasteen pystyy valitsemaan (helppo, keskivaikea, vaikea)
 
 -Pelin voi aloittaa alusta "r"-napilla (senhetkinen vaikeusaste)
+
+-Uusi sprite löydetylle miinalle
