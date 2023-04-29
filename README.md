@@ -27,3 +27,24 @@ poetry install
 ```
 poetry run invoke start
 ```
+## Komentorivitoiminnot
+### Ohjelman suorittaminen
+```
+poetry run invoke start
+```
+### Testaus
+```
+poetry run invoke test
+```
+### Testikattavuus
+```
+poetry run invoke coverage-report
+```
+### Pylint-tarkistus
+```
+poetry run invoke lint
+```
+### Automaattinen formatointi
+```
+poetry run invoke format
+```
