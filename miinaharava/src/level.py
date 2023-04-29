@@ -29,6 +29,7 @@ class Level:
         hovered: koordinaatit ruudulle, jonka päällä kursori on
         win: voiton/häviön tilanne
     """
+
     def __init__(self, size_x, size_y, mine_x):
         """Luokan konstruktori, joka luo uuden ruudukon
 
@@ -96,7 +97,7 @@ class Level:
             _y: ruudun y-koordinaatti
             norm_x: näytön x-koordinaatti
             norm_y: näytön y-koordinaatti
-        
+
         Returns:
             Piirrettävä sprite
         """
@@ -113,7 +114,7 @@ class Level:
             for _y in range(0, self.size[1]):
                 norm_x = _x*50
                 norm_y = _y*50
-                if self.revealed[_x][_y]==3:
+                if self.revealed[_x][_y] == 3:
                     self.all_sprites.add(FoundMine(norm_x, norm_y))
                 elif (not self.hovered is None) and self.hovered[0] == _x and self.hovered[1] == _y:
                     self.all_sprites.add(HoverSquare(norm_x, norm_y))
@@ -205,7 +206,7 @@ class Level:
             if first_click:
                 self.move_mine(_x, _y)
             else:
-                self.revealed[_x][_y]=3
+                self.revealed[_x][_y] = 3
                 self.win = -2
                 return
         self.revealed[_x][_y] = 1

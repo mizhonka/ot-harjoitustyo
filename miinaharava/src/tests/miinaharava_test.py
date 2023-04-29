@@ -30,7 +30,7 @@ class TestLevel(unittest.TestCase):
         self.y = 9
         self.m = 10
         self.level = Level(self.x, self.y, self.m)
-        self.game=Game()
+        self.game = Game()
 
     def test_grid_parameters(self):
         self.assertEqual(self.x, self.level.size[0])
@@ -49,7 +49,7 @@ class TestLevel(unittest.TestCase):
     def test_no_hover_when_end(self):
         if self.level.win < 0:
             assert self.level.hovered is None
-    
+
     def test_level_parameters(self):
         self.game.set_level(self.x, self.y, self.m)
         self.assertEqual(self.x, self.game.level_x)
