@@ -52,6 +52,7 @@ class Game:
         """Luo Level-olion ja käsittelee pelaajan syötteen
         """
         display = pygame.display.set_mode((self.level_x*50, self.level_y*50+100))
+        display.fill((200,200,200))
         pygame.display.set_caption("Miinaharava")
         level = Level(self.level_x, self.level_y, self.mine_x)
         pygame.init()
