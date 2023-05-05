@@ -139,7 +139,7 @@ class Level:
             _x: ruudun x-koordinaatti
             _y: ruudun y-koordinaatti
         """
-        if self.win < 0:
+        if self.win < 0 or _y>=self.size[1] or _x<0:
             self.hovered = None
             return
         if self.revealed[_x][_y] == 1 or self.revealed[_x][_y] == 2:
@@ -223,7 +223,7 @@ class Level:
             _x: ruudun x-koordinaatti
             _y: ruudun y-koordinaatti
         """
-        if self.win < 0:
+        if self.win < 0 or _y>=self.size[1]:
             return
         if self.revealed[_x][_y] == 1:
             return

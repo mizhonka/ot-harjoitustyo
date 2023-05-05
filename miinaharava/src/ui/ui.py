@@ -43,13 +43,15 @@ class Game:
         Returns:
             Kursorin sijainnin koordinaatit tuplena ruutuihin suhteutettuna
         """
+        if not pygame.mouse.get_focused():
+            return
         pos = pygame.mouse.get_pos()
         return (int(math.modf(pos[0]/50)[1]), int(math.modf(pos[1]/50)[1]))
 
     def main(self):
         """Luo Level-olion ja käsittelee pelaajan syötteen
         """
-        display = pygame.display.set_mode((self.level_x*50, self.level_y*50))
+        display = pygame.display.set_mode((self.level_x*50, self.level_y*50+100))
         pygame.display.set_caption("Miinaharava")
         level = Level(self.level_x, self.level_y, self.mine_x)
         pygame.init()
@@ -57,7 +59,10 @@ class Game:
         first_click = True
         while running:
             cords = self.mouse_pos()
-            level.hover(cords[0], cords[1])
+            if cords:
+                level.hover(cords[0], cords[1])
+            else:
+                level.hover(-1, -1)
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                     running = False
@@ -103,11 +108,14 @@ class Game:
         pygame.display.set_caption("Miinaharava")
         pygame.init()
         self.buttons = pygame.sprite.Group()
-        v = 0
+        v = -1
         running = True
         while running:
             cords = self.mouse_pos()
-            v = cords[1]
+            if cords:
+                v = cords[1]
+            else:
+                v=-1
             self.add_buttons(v)
             self.buttons.draw(display)
             pygame.display.update()
