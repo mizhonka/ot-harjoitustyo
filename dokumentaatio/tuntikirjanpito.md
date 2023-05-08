@@ -18,4 +18,5 @@
 |26.4.|1|Jatkokehitystä|
 |27.4.|2|Jatkokehitystä - Vaikeusasteet|
 ||1|testejä ja koodin parantelua|
-|yht|20|
+|5.5.|1|Käyttöliittymän laajentamista|
+|yht|21|
