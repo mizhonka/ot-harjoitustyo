@@ -21,9 +21,16 @@ class Game:
     def __init__(self):
         """Luokan konstruktori
         """
+        pygame.init()
         self.level_x = 0
         self.level_y = 0
         self.mine_x = 0
+        self.font=pygame.font.SysFont("Arial", 90)
+        self.mineText=self.font.render("0", True, (0,0,0))
+        self.timerText=self.font.render("0", True, (0,0,0))
+    
+    def change_mine_text(self, x):
+        self.mineText=self.font.render(str(x), True, (0,0,0))
 
     def set_level(self, x, y, m):
         """Asettaa ruudukon tiedot
@@ -52,12 +59,12 @@ class Game:
         """Luo Level-olion ja käsittelee pelaajan syötteen
         """
         display = pygame.display.set_mode((self.level_x*50, self.level_y*50+100))
-        display.fill((200,200,200))
         pygame.display.set_caption("Miinaharava")
+        pygame.time.set_timer(pygame.USEREVENT, 1000)
         level = Level(self.level_x, self.level_y, self.mine_x)
-        pygame.init()
         running = True
         first_click = True
+        timer=0
         while running:
             cords = self.mouse_pos()
             if cords:
@@ -65,6 +72,9 @@ class Game:
             else:
                 level.hover(-1, -1)
             for event in pygame.event.get():
+                if event.type==pygame.USEREVENT:
+                    self.timerText=self.font.render(str(timer), True, (0,0,0))
+                    timer+=1
                 if event.type == pygame.QUIT:
                     running = False
                 elif event.type == pygame.MOUSEBUTTONUP and event.button == 1:
@@ -78,7 +88,10 @@ class Game:
                 elif event.type == pygame.KEYDOWN and event.key == pygame.K_r:
                     level = Level(self.level_x, self.level_y, self.mine_x)
             level.init_sprites()
+            display.fill((200,200,200))
             level.all_sprites.draw(display)
+            display.blit(self.mineText, (50,self.level_y*50))
+            display.blit(self.timerText, (self.level_x*50-100, self.level_y*50))
             pygame.display.update()
         pygame.quit()
 
@@ -131,4 +144,5 @@ class Game:
             self.set_level(16, 16, 40)
         elif v == 3 or v == 4:
             self.set_level(30, 16, 99)
+        self.change_mine_text(self.mine_x)
         self.main()

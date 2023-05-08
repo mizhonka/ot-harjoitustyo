@@ -20,4 +20,5 @@
 ||1|testejä ja koodin parantelua|
 |5.5.|1|Käyttöliittymän laajentamista|
 |8.5.|<1|Grafiikoiden parantelua|
-|yht|21|
+||<1|Käyttöliittymän laajentamista|
+|yht|22|
