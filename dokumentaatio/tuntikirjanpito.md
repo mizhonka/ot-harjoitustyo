@@ -22,4 +22,5 @@
 |8.5.|<1|Grafiikoiden parantelua|
 ||<1|Käyttöliittymän laajentamista|
 |9.5.|1|Käyttöliittymän laajentamista|
-|yht|23|
+||2|Tietokannan toteutus|
+|yht|25|
