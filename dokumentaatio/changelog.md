@@ -32,3 +32,10 @@
 -Pelin voi aloittaa alusta "r"-napilla (senhetkinen vaikeusaste)
 
 -Uusi sprite löydetylle miinalle
+
+### Viikko 7
+-Pelissä on laskuri merkatuille miinoille
+
+-Pelissä on ajastin
+
+-Luotu SQL-tietokanta, joka pitää kirjaa ennätyksistä
