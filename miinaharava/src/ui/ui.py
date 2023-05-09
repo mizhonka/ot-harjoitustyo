@@ -1,5 +1,6 @@
 import math
 import pygame
+from highscores import Highscores
 from level import Level
 from sprites.easy import Easy
 from sprites.easy_light import EasyLight
@@ -13,6 +14,8 @@ class Game:
     """Luokka, joka luo uuden pelin ja käsittelee pelaajan syötteen
 
     Attributes:
+        scores: ennätyksien tietokanta
+        v: vaikeusaste
         level_x: ruudukon leveys
         level_y: ruudukon korkeus
         mine_x: miinojen määrä
@@ -26,6 +29,8 @@ class Game:
         """Luokan konstruktori
         """
         pygame.init()
+        self.scores=Highscores()
+        self.v=-1
         self.level_x = 0
         self.level_y = 0
         self.mine_x = 0
@@ -89,9 +94,13 @@ class Game:
                     level.reveal(cords[0], cords[1], first_click)
                     if first_click:
                         first_click = False
+                    if level.win==-1:
+                        self.scores.set_record(self.v, timer)
                 elif event.type == pygame.MOUSEBUTTONUP and event.button == 3:
                     self.flagged+=level.draw_flag(cords[0], cords[1])
                     self.change_mine_text()
+                    if level.win==-1:
+                        self.scores.set_record(self.v, timer)
                 elif event.type == pygame.KEYDOWN and event.key == pygame.K_ESCAPE:
                     running = False
                 elif event.type == pygame.KEYDOWN and event.key == pygame.K_r:
@@ -109,22 +118,19 @@ class Game:
             pygame.display.update()
         pygame.quit()
 
-    def add_buttons(self, v):
+    def add_buttons(self):
         """Lisää oikeat valikkonapit ryhmään
-
-        Args:
-            v: vaikeusaste
         """
         self.buttons.empty()
-        if v == 0:
+        if self.v == 0:
             self.buttons.add(EasyLight(0, 0))
         else:
             self.buttons.add(Easy(0, 0))
-        if v == 1 or v == 2:
+        if self.v == 1 or self.v == 2:
             self.buttons.add(MediumLight(0, 75))
         else:
             self.buttons.add(Medium(0, 75))
-        if v == 3 or v == 4:
+        if self.v == 3 or self.v == 4:
             self.buttons.add(HardLight(0, 150))
         else:
             self.buttons.add(Hard(0, 150))
@@ -136,15 +142,14 @@ class Game:
         pygame.display.set_caption("Miinaharava")
         pygame.init()
         self.buttons = pygame.sprite.Group()
-        v = -1
         running = True
         while running:
             cords = self.mouse_pos()
             if cords:
-                v = cords[1]
+                self.v = cords[1]
             else:
-                v=-1
-            self.add_buttons(v)
+                self.v=-1
+            self.add_buttons()
             self.buttons.draw(display)
             pygame.display.update()
             for event in pygame.event.get():
@@ -152,11 +157,11 @@ class Game:
                     return
                 elif event.type == pygame.MOUSEBUTTONUP and event.button == 1:
                     running = False
-        if v == 0:
+        if self.v == 0:
             self.set_level(9, 9, 10)
-        elif v == 1 or v == 2:
+        elif self.v == 1 or self.v == 2:
             self.set_level(16, 16, 40)
-        elif v == 3 or v == 4:
+        elif self.v == 3 or self.v == 4:
             self.set_level(30, 16, 99)
         self.change_mine_text()
         self.main()
