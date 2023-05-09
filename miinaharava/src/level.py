@@ -224,14 +224,18 @@ class Level:
             _y: ruudun y-koordinaatti
         """
         if self.win < 0 or _y>=self.size[1]:
-            return
+            return 0
         if self.revealed[_x][_y] == 1:
-            return
+            return 0
         if self.revealed[_x][_y] == 0:
             self.hovered = None
             self.revealed[_x][_y] = 2
             self.win += 1
+            self.check_game_end()
+            return -1
         else:
             self.revealed[_x][_y] = 0
             self.win -= 1
-        self.check_game_end()
+            self.check_game_end()
+            return 1
+        

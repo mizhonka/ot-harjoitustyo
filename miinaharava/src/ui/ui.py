@@ -16,6 +16,10 @@ class Game:
         level_x: ruudukon leveys
         level_y: ruudukon korkeus
         mine_x: miinojen määrä
+        flagged: lippujen määrä
+        font: laskureissa käytettävä fontti
+        mineText: miinojen laskurin teksti
+        timerText: ajastimen teksti
     """
 
     def __init__(self):
@@ -25,12 +29,15 @@ class Game:
         self.level_x = 0
         self.level_y = 0
         self.mine_x = 0
+        self.flagged=0
         self.font=pygame.font.SysFont("Arial", 90)
         self.mineText=self.font.render("0", True, (0,0,0))
         self.timerText=self.font.render("0", True, (0,0,0))
     
-    def change_mine_text(self, x):
-        self.mineText=self.font.render(str(x), True, (0,0,0))
+    def change_mine_text(self):
+        """Muuttaa miinojen laskurin arvoa
+        """
+        self.mineText=self.font.render(str(self.flagged), True, (0,0,0))
 
     def set_level(self, x, y, m):
         """Asettaa ruudukon tiedot
@@ -43,6 +50,7 @@ class Game:
         self.level_x = x
         self.level_y = y
         self.mine_x = m
+        self.flagged=m
 
     def mouse_pos(self):
         """Hakee kursorin sijainnin
@@ -72,7 +80,7 @@ class Game:
             else:
                 level.hover(-1, -1)
             for event in pygame.event.get():
-                if event.type==pygame.USEREVENT:
+                if event.type==pygame.USEREVENT and not first_click and level.win>0:
                     self.timerText=self.font.render(str(timer), True, (0,0,0))
                     timer+=1
                 if event.type == pygame.QUIT:
@@ -82,16 +90,22 @@ class Game:
                     if first_click:
                         first_click = False
                 elif event.type == pygame.MOUSEBUTTONUP and event.button == 3:
-                    level.draw_flag(cords[0], cords[1])
+                    self.flagged+=level.draw_flag(cords[0], cords[1])
+                    self.change_mine_text()
                 elif event.type == pygame.KEYDOWN and event.key == pygame.K_ESCAPE:
                     running = False
                 elif event.type == pygame.KEYDOWN and event.key == pygame.K_r:
                     level = Level(self.level_x, self.level_y, self.mine_x)
+                    self.flagged=self.mine_x
+                    self.change_mine_text()
+                    first_click=True
+                    timer=0
+                    self.timerText=self.font.render("0", True, (0,0,0))
             level.init_sprites()
             display.fill((200,200,200))
             level.all_sprites.draw(display)
-            display.blit(self.mineText, (50,self.level_y*50))
-            display.blit(self.timerText, (self.level_x*50-100, self.level_y*50))
+            display.blit(self.mineText, (40,self.level_y*50))
+            display.blit(self.timerText, (self.level_x*30, self.level_y*50))
             pygame.display.update()
         pygame.quit()
 
@@ -144,5 +158,5 @@ class Game:
             self.set_level(16, 16, 40)
         elif v == 3 or v == 4:
             self.set_level(30, 16, 99)
-        self.change_mine_text(self.mine_x)
+        self.change_mine_text()
         self.main()
