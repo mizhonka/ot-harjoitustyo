@@ -24,5 +24,5 @@
 |9.5.|1|Käyttöliittymän laajentamista|
 ||2|Tietokannan toteutus|
 |10.5.|2|Tietokannan toteutus|
-||2|Käyttöliittymän laajentamista|
-|yht|27|
+||3|Käyttöliittymän laajentamista|
+|yht|31|
