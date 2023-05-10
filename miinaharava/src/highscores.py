@@ -27,17 +27,25 @@ class Highscores:
             t: pelaajan aika (tulos)
         """
         table="Easy"
-        if v==1:
+        if v==1 or v==2:
             table="Medium"
-        elif v==2:
+        elif v==3 or v==4:
             table="Hard"
-        command="SELECT score FROM "+table
+        command="SELECT * FROM "+table
         scores=self.db.execute(command).fetchall()
-        command="INSERT INTO " +table + "(score) VALUES (?)"
         if len(scores)<5:
+            command="INSERT INTO " +table + "(score) VALUES (?)"
             self.db.execute(command, [t,])
-            command="SELECT * FROM "+table+" ORDER BY score"
-            self.db.execute(command)
-        print(self.db.execute("SELECT score FROM Easy").fetchall())
-        print(self.db.execute("SELECT score FROM Medium").fetchall())
-        print(self.db.execute("SELECT score FROM Hard").fetchall())
+        else:
+            for p in scores:
+                if t<p[1]:
+                    command="SELECT id, MAX(score) FROM "+table
+                    worst=self.db.execute(command).fetchone()
+                    command="DELETE FROM "+table+" WHERE id=?"
+                    self.db.execute(command, [worst[0]])
+                    command="INSERT INTO " +table + "(score) VALUES (?)"
+                    self.db.execute(command, [t,])
+                    break
+        print(self.db.execute("SELECT score FROM Easy ORDER BY score").fetchall())
+        print(self.db.execute("SELECT score FROM Medium ORDER BY score").fetchall())
+        print(self.db.execute("SELECT score FROM Hard ORDER BY score").fetchall())

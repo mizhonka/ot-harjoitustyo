@@ -77,7 +77,7 @@ class Game:
         level = Level(self.level_x, self.level_y, self.mine_x)
         running = True
         first_click = True
-        timer=0
+        timer=1
         while running:
             cords = self.mouse_pos()
             if cords:
@@ -108,7 +108,7 @@ class Game:
                     self.flagged=self.mine_x
                     self.change_mine_text()
                     first_click=True
-                    timer=0
+                    timer=1
                     self.timerText=self.font.render("0", True, (0,0,0))
             level.init_sprites()
             display.fill((200,200,200))
