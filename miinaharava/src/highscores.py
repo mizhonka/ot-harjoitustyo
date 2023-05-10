@@ -15,9 +15,37 @@ class Highscores:
         self.db.execute("CREATE TABLE IF NOT EXISTS Hard (id INTEGER PRIMARY KEY, score INTEGER)")
     
     def clear_tables(self):
+        """Tyhjentää taulukot
+        """
         self.db.execute("DELETE FROM Easy")
         self.db.execute("DELETE FROM Medium")
         self.db.execute("DELETE FROM Hard")
+    
+    def table_name(self, v):
+        """Palauttaa vaikeusasteen mukaisen taulukon nimen
+
+        Args:
+            v: pelattu vaikeusaste
+        """
+        table="Easy"
+        if v==1 or v==2:
+            table="Medium"
+        elif v==3 or v==4:
+            table="Hard"
+        return table
+    
+    def get_records(self, v):
+        """Hakee vaikeusasteen ennätykset
+
+        Args:
+            v: pelattu vaikeusaste
+        
+        Returns:
+            Ennätykset tuplena listassa
+        """
+        table=self.table_name(v)
+        command="SELECT score FROM "+table+" ORDER BY score"
+        return self.db.execute(command).fetchall()
     
     def set_record(self, v, t):
         """Tarkistaa, onko pelaajan tulos uusi ennätys ja lisää sen tarvittaessa tietokantaan
@@ -26,11 +54,7 @@ class Highscores:
             v: pelattu vaikeusaste
             t: pelaajan aika (tulos)
         """
-        table="Easy"
-        if v==1 or v==2:
-            table="Medium"
-        elif v==3 or v==4:
-            table="Hard"
+        table=self.table_name(v)
         command="SELECT * FROM "+table
         scores=self.db.execute(command).fetchall()
         if len(scores)<5:
@@ -46,6 +70,3 @@ class Highscores:
                     command="INSERT INTO " +table + "(score) VALUES (?)"
                     self.db.execute(command, [t,])
                     break
-        print(self.db.execute("SELECT score FROM Easy ORDER BY score").fetchall())
-        print(self.db.execute("SELECT score FROM Medium ORDER BY score").fetchall())
-        print(self.db.execute("SELECT score FROM Hard ORDER BY score").fetchall())

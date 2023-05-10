@@ -12,6 +12,7 @@ from sprites.number8 import Number8
 from sprites.hover_square import HoverSquare
 from sprites.revealed_square import RevealedSquare
 from sprites.flag import Flag
+from sprites.end_screen import EndScreen
 from sprites.win import Win
 from sprites.lose import Lose
 from sprites.found_mine import FoundMine
@@ -125,12 +126,9 @@ class Level:
                         self._get_number(_x, _y, norm_x, norm_y))
                 else:
                     self.all_sprites.add(Square(norm_x, norm_y))
-        if self.win == -1:
+        if self.win<0:
             self.all_sprites.add(
-                Win((self.size[0]*50)/2-125, (self.size[1]*50)/2-75))
-        elif self.win == -2:
-            self.all_sprites.add(
-                Lose((self.size[0]*50)/2-125, (self.size[1]*50)/2-75))
+                EndScreen((self.size[0]*50)/2-200, (self.size[1]*50)/2-200))
 
     def hover(self, _x, _y):
         """Määrittää korostetun ruudun koordinaatit
@@ -222,6 +220,9 @@ class Level:
         Args:
             _x: ruudun x-koordinaatti
             _y: ruudun y-koordinaatti
+        
+        Returns:
+            Kokonaisluvun; 0 jos ei tehty mitään, 1 jos poistettiin lippu, -1 jos piirrettiin lippu
         """
         if self.win < 0 or _y>=self.size[1]:
             return 0

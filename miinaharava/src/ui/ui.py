@@ -20,9 +20,14 @@ class Game:
         level_y: ruudukon korkeus
         mine_x: miinojen määrä
         flagged: lippujen määrä
-        font: laskureissa käytettävä fontti
+        font: teksteissä käytettävä fontti
+        smallFont: pienempi fontti
         mineText: miinojen laskurin teksti
         timerText: ajastimen teksti
+        winText: voittonäkymän otsikon teksti
+        loseText: häviönäkymän otsikon teksti
+        resetText: ohjeiden teksti
+        title: ennätyslistan otsikon teksti
     """
 
     def __init__(self):
@@ -36,8 +41,13 @@ class Game:
         self.mine_x = 0
         self.flagged=0
         self.font=pygame.font.SysFont("Arial", 90)
+        self.smallFont=pygame.font.SysFont("Arial", 20)
         self.mineText=self.font.render("0", True, (0,0,0))
         self.timerText=self.font.render("0", True, (0,0,0))
+        self.winText=self.font.render("Voitit!", True, (94, 179, 56))
+        self.loseText=self.font.render("Hävisit!", True,(237,77,21))
+        self.resetText=self.smallFont.render("(R) - yritä uudelleen, (ESC) - lopeta", True, (0,0,0))
+        self.title=self.smallFont.render("TOP-5 ajat:", True, (0,0,0))
     
     def change_mine_text(self):
         """Muuttaa miinojen laskurin arvoa
@@ -85,18 +95,18 @@ class Game:
             else:
                 level.hover(-1, -1)
             for event in pygame.event.get():
-                if event.type==pygame.USEREVENT and not first_click and level.win>0:
+                if event.type==pygame.USEREVENT and not first_click and level.win>=0:
                     self.timerText=self.font.render(str(timer), True, (0,0,0))
                     timer+=1
                 if event.type == pygame.QUIT:
                     running = False
-                elif event.type == pygame.MOUSEBUTTONUP and event.button == 1:
+                elif event.type == pygame.MOUSEBUTTONUP and event.button == 1 and level.win>=0:
                     level.reveal(cords[0], cords[1], first_click)
                     if first_click:
                         first_click = False
                     if level.win==-1:
                         self.scores.set_record(self.v, timer)
-                elif event.type == pygame.MOUSEBUTTONUP and event.button == 3:
+                elif event.type == pygame.MOUSEBUTTONUP and event.button == 3 and level.win>=0:
                     self.flagged+=level.draw_flag(cords[0], cords[1])
                     self.change_mine_text()
                     if level.win==-1:
@@ -113,8 +123,27 @@ class Game:
             level.init_sprites()
             display.fill((200,200,200))
             level.all_sprites.draw(display)
-            display.blit(self.mineText, (40,self.level_y*50))
-            display.blit(self.timerText, (self.level_x*30, self.level_y*50))
+            display.blit(self.mineText, (0,self.level_y*50))
+            display.blit(self.timerText, (self.level_x*50-170, self.level_y*50))
+            if level.win<0:
+                rect=self.resetText.get_rect(center=(self.level_x*50/2, self.level_y*50/2-60))
+                display.blit(self.resetText, rect)
+                rect=self.title.get_rect(center=(self.level_x*50/2, self.level_y*50/2))
+                display.blit(self.title, rect)
+                records=self.scores.get_records(self.v)
+                for i in range(5):
+                    t="-"
+                    if len(records)>i:
+                        t=str(records[i][0])+" s"
+                    s=self.smallFont.render(t, True, (0,0,0))
+                    rect=s.get_rect(center=(self.level_x*50/2, self.level_y*50/2+40+i*30))
+                    display.blit(s, rect)
+                if level.win==-1:
+                    rect=self.winText.get_rect(center=(self.level_x*50/2, self.level_y*50/2-125))
+                    display.blit(self.winText, rect)
+                elif level.win==-2:
+                    rect=self.loseText.get_rect(center=(self.level_x*50/2, self.level_y*50/2-125))
+                    display.blit(self.loseText, rect)
             pygame.display.update()
         pygame.quit()
 
