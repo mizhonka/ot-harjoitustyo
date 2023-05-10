@@ -39,3 +39,5 @@
 -Pelissä on ajastin
 
 -Luotu SQL-tietokanta, joka pitää kirjaa ennätyksistä
+
+-Käyttöliittymää muutettu: jokaisen pelin päätteeksi näkee ennätyslistan ja näppäinkomennot
