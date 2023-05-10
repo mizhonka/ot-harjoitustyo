@@ -16,6 +16,6 @@ Kyseessä on all-time classic miinaharava. Pelaajan tavoitteena on löytää pii
 ## Jatkokehitysideoita
 - [X] Pelin vaikeusastetta (ruutujen ja miinojen määrää) pystyy vaihtamaan
 
-- [ ] Pelin aikana näkyy laskuri, joka näyttää jäljellä olevat miinat
+- [X] Pelin aikana näkyy laskuri, joka näyttää jäljellä olevat miinat
 
 - [ ] Pelin väriteemaa ja ulkonäköä pystyy muuttamaan
