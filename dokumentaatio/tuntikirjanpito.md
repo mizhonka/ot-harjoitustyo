@@ -25,4 +25,5 @@
 ||2|Tietokannan toteutus|
 |10.5.|2|Tietokannan toteutus|
 ||3|Käyttöliittymän laajentamista|
-|yht|31|
+|11.5.|1|Testaamista|
+|yht|32|

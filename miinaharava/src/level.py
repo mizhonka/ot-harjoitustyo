@@ -13,8 +13,6 @@ from sprites.hover_square import HoverSquare
 from sprites.revealed_square import RevealedSquare
 from sprites.flag import Flag
 from sprites.end_screen import EndScreen
-from sprites.win import Win
-from sprites.lose import Lose
 from sprites.found_mine import FoundMine
 
 
@@ -126,7 +124,7 @@ class Level:
                         self._get_number(_x, _y, norm_x, norm_y))
                 else:
                     self.all_sprites.add(Square(norm_x, norm_y))
-        if self.win<0:
+        if self.win < 0:
             self.all_sprites.add(
                 EndScreen((self.size[0]*50)/2-200, (self.size[1]*50)/2-200))
 
@@ -137,7 +135,7 @@ class Level:
             _x: ruudun x-koordinaatti
             _y: ruudun y-koordinaatti
         """
-        if self.win < 0 or _y>=self.size[1] or _x<0:
+        if self.win < 0 or _y >= self.size[1] or _x < 0:
             self.hovered = None
             return
         if self.revealed[_x][_y] == 1 or self.revealed[_x][_y] == 2:
@@ -193,13 +191,16 @@ class Level:
             _x: ruudun x-koordinaatti
             _y: ruudun y-koordinaatti
             first_click: onko tämä ensimmäinen klikattu ruutu (True/False)
+        
+        Returns:
+            False, jos ruutua ei voi paljastaa
         """
         if (_x < 0 or _x > self.size[0]-1) or (_y < 0 or _y > self.size[1]-1):
-            return
+            return False
         if self.win < 0:
-            return
+            return False
         if self.revealed[_x][_y] == 1 or self.revealed[_x][_y] == 2:
-            return
+            return False
         if self.mines[_x][_y] == 1:
             if first_click:
                 self.move_mine(_x, _y)
@@ -220,11 +221,11 @@ class Level:
         Args:
             _x: ruudun x-koordinaatti
             _y: ruudun y-koordinaatti
-        
+
         Returns:
             Kokonaisluvun; 0 jos ei tehty mitään, 1 jos poistettiin lippu, -1 jos piirrettiin lippu
         """
-        if self.win < 0 or _y>=self.size[1]:
+        if self.win < 0 or _y >= self.size[1]:
             return 0
         if self.revealed[_x][_y] == 1:
             return 0
@@ -234,9 +235,7 @@ class Level:
             self.win += 1
             self.check_game_end()
             return -1
-        else:
-            self.revealed[_x][_y] = 0
-            self.win -= 1
-            self.check_game_end()
-            return 1
-        
+        self.revealed[_x][_y] = 0
+        self.win -= 1
+        self.check_game_end()
+        return 1

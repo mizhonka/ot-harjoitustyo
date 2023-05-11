@@ -34,25 +34,26 @@ class Game:
         """Luokan konstruktori
         """
         pygame.init()
-        self.scores=Highscores()
-        self.v=-1
+        self.scores = Highscores()
+        self.v = -1
         self.level_x = 0
         self.level_y = 0
         self.mine_x = 0
-        self.flagged=0
-        self.font=pygame.font.SysFont("Arial", 90)
-        self.smallFont=pygame.font.SysFont("Arial", 20)
-        self.mineText=self.font.render("0", True, (0,0,0))
-        self.timerText=self.font.render("0", True, (0,0,0))
-        self.winText=self.font.render("Voitit!", True, (94, 179, 56))
-        self.loseText=self.font.render("Hävisit!", True,(237,77,21))
-        self.resetText=self.smallFont.render("(R) - yritä uudelleen, (ESC) - lopeta", True, (0,0,0))
-        self.title=self.smallFont.render("TOP-5 ajat:", True, (0,0,0))
-    
+        self.flagged = 0
+        self.font = pygame.font.SysFont("Arial", 90)
+        self.smallFont = pygame.font.SysFont("Arial", 20)
+        self.mineText = self.font.render("0", True, (0, 0, 0))
+        self.timerText = self.font.render("0", True, (0, 0, 0))
+        self.winText = self.font.render("Voitit!", True, (94, 179, 56))
+        self.loseText = self.font.render("Hävisit!", True, (237, 77, 21))
+        self.resetText = self.smallFont.render(
+            "(R) - yritä uudelleen, (ESC) - lopeta", True, (0, 0, 0))
+        self.title = self.smallFont.render("TOP-5 ajat:", True, (0, 0, 0))
+
     def change_mine_text(self):
         """Muuttaa miinojen laskurin arvoa
         """
-        self.mineText=self.font.render(str(self.flagged), True, (0,0,0))
+        self.mineText = self.font.render(str(self.flagged), True, (0, 0, 0))
 
     def set_level(self, x, y, m):
         """Asettaa ruudukon tiedot
@@ -65,7 +66,7 @@ class Game:
         self.level_x = x
         self.level_y = y
         self.mine_x = m
-        self.flagged=m
+        self.flagged = m
 
     def mouse_pos(self):
         """Hakee kursorin sijainnin
@@ -81,13 +82,14 @@ class Game:
     def main(self):
         """Luo Level-olion ja käsittelee pelaajan syötteen
         """
-        display = pygame.display.set_mode((self.level_x*50, self.level_y*50+100))
+        display = pygame.display.set_mode(
+            (self.level_x*50, self.level_y*50+100))
         pygame.display.set_caption("Miinaharava")
         pygame.time.set_timer(pygame.USEREVENT, 1000)
         level = Level(self.level_x, self.level_y, self.mine_x)
         running = True
         first_click = True
-        timer=1
+        timer = 1
         while running:
             cords = self.mouse_pos()
             if cords:
@@ -95,54 +97,61 @@ class Game:
             else:
                 level.hover(-1, -1)
             for event in pygame.event.get():
-                if event.type==pygame.USEREVENT and not first_click and level.win>=0:
-                    self.timerText=self.font.render(str(timer), True, (0,0,0))
-                    timer+=1
+                if event.type == pygame.USEREVENT and not first_click and level.win >= 0:
+                    self.timerText = self.font.render(
+                        str(timer), True, (0, 0, 0))
+                    timer += 1
                 if event.type == pygame.QUIT:
                     running = False
-                elif event.type == pygame.MOUSEBUTTONUP and event.button == 1 and level.win>=0:
+                elif event.type == pygame.MOUSEBUTTONUP and event.button == 1 and level.win >= 0:
                     level.reveal(cords[0], cords[1], first_click)
                     if first_click:
                         first_click = False
-                    if level.win==-1:
+                    if level.win == -1:
                         self.scores.set_record(self.v, timer)
-                elif event.type == pygame.MOUSEBUTTONUP and event.button == 3 and level.win>=0:
-                    self.flagged+=level.draw_flag(cords[0], cords[1])
+                elif event.type == pygame.MOUSEBUTTONUP and event.button == 3 and level.win >= 0:
+                    self.flagged += level.draw_flag(cords[0], cords[1])
                     self.change_mine_text()
-                    if level.win==-1:
+                    if level.win == -1:
                         self.scores.set_record(self.v, timer)
                 elif event.type == pygame.KEYDOWN and event.key == pygame.K_ESCAPE:
                     running = False
                 elif event.type == pygame.KEYDOWN and event.key == pygame.K_r:
                     level = Level(self.level_x, self.level_y, self.mine_x)
-                    self.flagged=self.mine_x
+                    self.flagged = self.mine_x
                     self.change_mine_text()
-                    first_click=True
-                    timer=1
-                    self.timerText=self.font.render("0", True, (0,0,0))
+                    first_click = True
+                    timer = 1
+                    self.timerText = self.font.render("0", True, (0, 0, 0))
             level.init_sprites()
-            display.fill((200,200,200))
+            display.fill((200, 200, 200))
             level.all_sprites.draw(display)
-            display.blit(self.mineText, (0,self.level_y*50))
-            display.blit(self.timerText, (self.level_x*50-170, self.level_y*50))
-            if level.win<0:
-                rect=self.resetText.get_rect(center=(self.level_x*50/2, self.level_y*50/2-60))
+            display.blit(self.mineText, (0, self.level_y*50))
+            display.blit(self.timerText,
+                         (self.level_x*50-170, self.level_y*50))
+            if level.win < 0:
+                rect = self.resetText.get_rect(
+                    center=(self.level_x*50/2, self.level_y*50/2-60))
                 display.blit(self.resetText, rect)
-                rect=self.title.get_rect(center=(self.level_x*50/2, self.level_y*50/2))
+                rect = self.title.get_rect(
+                    center=(self.level_x*50/2, self.level_y*50/2))
                 display.blit(self.title, rect)
-                records=self.scores.get_records(self.v)
+                records = self.scores.get_records(self.v)
                 for i in range(5):
-                    t="-"
-                    if len(records)>i:
-                        t=str(records[i][0])+" s"
-                    s=self.smallFont.render(t, True, (0,0,0))
-                    rect=s.get_rect(center=(self.level_x*50/2, self.level_y*50/2+40+i*30))
+                    t = "-"
+                    if len(records) > i:
+                        t = str(records[i][0])+" s"
+                    s = self.smallFont.render(t, True, (0, 0, 0))
+                    rect = s.get_rect(
+                        center=(self.level_x*50/2, self.level_y*50/2+40+i*30))
                     display.blit(s, rect)
-                if level.win==-1:
-                    rect=self.winText.get_rect(center=(self.level_x*50/2, self.level_y*50/2-125))
+                if level.win == -1:
+                    rect = self.winText.get_rect(
+                        center=(self.level_x*50/2, self.level_y*50/2-125))
                     display.blit(self.winText, rect)
-                elif level.win==-2:
-                    rect=self.loseText.get_rect(center=(self.level_x*50/2, self.level_y*50/2-125))
+                elif level.win == -2:
+                    rect = self.loseText.get_rect(
+                        center=(self.level_x*50/2, self.level_y*50/2-125))
                     display.blit(self.loseText, rect)
             pygame.display.update()
         pygame.quit()
@@ -177,7 +186,7 @@ class Game:
             if cords:
                 self.v = cords[1]
             else:
-                self.v=-1
+                self.v = -1
             self.add_buttons()
             self.buttons.draw(display)
             pygame.display.update()

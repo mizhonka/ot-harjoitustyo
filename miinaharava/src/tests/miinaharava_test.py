@@ -14,14 +14,14 @@ from sprites.number8 import Number8
 from sprites.hover_square import HoverSquare
 from sprites.revealed_square import RevealedSquare
 from sprites.flag import Flag
-from sprites.win import Win
-from sprites.lose import Lose
+from sprites.end_screen import EndScreen
 from sprites.easy import Easy
 from sprites.easy_light import EasyLight
 from sprites.medium import Medium
 from sprites.medium_light import MediumLight
 from sprites.hard import Hard
 from sprites.hard_light import HardLight
+from sprites.found_mine import FoundMine
 
 
 class TestLevel(unittest.TestCase):
@@ -38,8 +38,8 @@ class TestLevel(unittest.TestCase):
         self.assertEqual(self.m, self.level.mine_x)
 
     def test_sprite_rect(self):
-        ss = [Square, HoverSquare, Flag, Win, Lose, RevealedSquare, Number1, Number2, Number3,
-              Number4, Number5, Number6, Number7, Number8, Easy, EasyLight, Medium, MediumLight, Hard, HardLight]
+        ss = [Square, HoverSquare, Flag, EndScreen, RevealedSquare, Number1, Number2, Number3,
+              Number4, Number5, Number6, Number7, Number8, Easy, EasyLight, Medium, MediumLight, Hard, HardLight, FoundMine]
         for s in ss:
             s = s()
             assert s.rect is not None
@@ -55,3 +55,34 @@ class TestLevel(unittest.TestCase):
         self.assertEqual(self.x, self.game.level_x)
         self.assertEqual(self.y, self.game.level_y)
         self.assertEqual(self.m, self.game.mine_x)
+    
+    def test_wrong_flags_no_win(self):
+        for i in range(self.x):
+            for j in range(self.y):
+                self.level.draw_flag(i, j)
+        self.assertNotEqual(self.level.win, -1)
+    
+    def test_no_flags_after_end(self):
+        self.level.win=-1
+        self.assertEqual(self.level.draw_flag(0,0), 0)
+        self.level.win=-2
+        self.assertEqual(self.level.draw_flag(0,0), 0)
+    
+    def test_dont_reveal_revealed(self):
+        self.level.reveal(0, 0, True)
+        self.assertEqual(self.level.reveal(0, 0, False), False)
+    
+    def test_reveal_adjacents(self):
+        for i in range(1, self.x-1):
+            for j in range(1, self.y-1):
+                if self.level.adjacent[i][j]==0:
+                    self.level.reveal(i, j, True)
+                    self.assertEqual(self.level.revealed[i-1][j+1], 1)
+                    self.assertEqual(self.level.revealed[i][j+1], 1)
+                    self.assertEqual(self.level.revealed[i+1][j+1], 1)
+                    self.assertEqual(self.level.revealed[i-1][j], 1)
+                    self.assertEqual(self.level.revealed[i+1][j], 1)
+                    self.assertEqual(self.level.revealed[i-1][j-1], 1)
+                    self.assertEqual(self.level.revealed[i][j-1], 1)
+                    self.assertEqual(self.level.revealed[i+1][j-1], 1)
+                    break
