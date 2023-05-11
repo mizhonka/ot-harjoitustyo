@@ -41,3 +41,10 @@
 -Luotu SQL-tietokanta, joka pitää kirjaa ennätyksistä
 
 -Käyttöliittymää muutettu: jokaisen pelin päätteeksi näkee ennätyslistan ja näppäinkomennot
+
+-Testattu, että
+
++ Peliä ei voi voittaa väärinasetetuilla lipuilla
++ Lippuja ei voi asettaa pelin loputtua
++ Paljastettua ruutua ei voi paljastaa uudelleen
++ Jos paljastetun ruudun ympärillä ei ole miinoja, myös nämä ruudut ovat paljastuneet
