@@ -18,4 +18,6 @@ Kyseessä on all-time classic miinaharava. Pelaajan tavoitteena on löytää pii
 
 - [X] Pelin aikana näkyy laskuri, joka näyttää jäljellä olevat miinat
 
+- [X] Peli pitää kirjaa ennätyksistä (parhaista ajoista)
+
 - [ ] Pelin väriteemaa ja ulkonäköä pystyy muuttamaan
