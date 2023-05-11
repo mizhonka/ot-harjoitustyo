@@ -13,6 +13,8 @@ Pelissä on tarkoitus löytää piilotetut miinat ruudukosta numerovihjeiden per
 
 [Arkkitehtuurikuvaus](https://github.com/mizhonka/ot-harjoitustyo/blob/main/dokumentaatio/arkkitehtuuri.md)
 
+[Testausdokumentti](https://github.com/mizhonka/ot-harjoitustyo/blob/main/dokumentaatio/testaus.md)
+
 ## Asennus
 [Releaset](https://github.com/mizhonka/ot-harjoitustyo/releases)
 
